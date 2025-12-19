@@ -1445,7 +1445,21 @@
 
 }
 
-  
+  /* Desktop contact form only */
+.desktop-contact {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .desktop-contact {
+    display: block;
+  }
+
+  .contact-open-btn {
+    display: none;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -1556,10 +1570,47 @@
             style="color: var(--accent); font-size:1.06em; letter-spacing:0.01em; text-align:center; margin-bottom:0;">
             sarah@example.com
           </a>
-          <button class="contact-open-btn" id="openContactSheet">
+          <!-- MOBILE BUTTON -->
+<button class="contact-open-btn" id="openContactSheet">
   <i class="fas fa-envelope"></i>
   Send a Business Inquiry
 </button>
+
+<!-- DESKTOP FORM -->
+<div class="contact-form-container desktop-contact">
+  <form action="mailto:sarah@example.com" method="post" enctype="text/plain">
+
+    <div class="form-group">
+      <label>Type of Inquiry</label>
+      <select name="Inquiry Type" required>
+        <option value="">Select</option>
+        <option>Show Booking</option>
+        <option>Brand Collaboration</option>
+        <option>Private Event</option>
+        <option>Media / Interview</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" name="Name" required>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" name="Email" required>
+    </div>
+
+    <div class="form-group">
+      <label>Message</label>
+      <textarea name="Message" required></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Send Inquiry</button>
+  </form>
+</div>
+
 
             
           </div>
@@ -1821,6 +1872,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const btnProfile = document.getElementById('btnProfile');
+  const btnShows = document.getElementById('btnShows');
+  const profileContent = document.getElementById('profileContent');
+  const showsContent = document.getElementById('showsContent');
+
+  if (!btnProfile || !btnShows) return;
+
+  btnProfile.addEventListener('click', () => {
+    btnProfile.classList.add('active');
+    btnProfile.setAttribute('aria-pressed', 'true');
+
+    btnShows.classList.remove('active');
+    btnShows.setAttribute('aria-pressed', 'false');
+
+    profileContent.style.display = 'block';
+    showsContent.style.display = 'none';
+  });
+
+  btnShows.addEventListener('click', () => {
+    btnShows.classList.add('active');
+    btnShows.setAttribute('aria-pressed', 'true');
+
+    btnProfile.classList.remove('active');
+    btnProfile.setAttribute('aria-pressed', 'false');
+
+    profileContent.style.display = 'none';
+    showsContent.style.display = 'block';
+
+    // scroll into view for better UX
+    showsContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 });
 </script>
 
