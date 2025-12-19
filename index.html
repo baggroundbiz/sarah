@@ -118,6 +118,43 @@
       margin-bottom: 2.4em;
       animation: fadeInUp 1.7s;
     }
+    
+    /* =====================
+   BUSINESS EMAIL PILL
+   ===================== */
+
+.contact-email-pill {
+  display: inline-block;
+
+  padding: 0.45em 1.4em;
+  border-radius: 999px;
+
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+
+  color: var(--accent);
+  background: rgba(255,255,255,0.08);
+  border: 1.4px solid var(--accent);
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Hover / Focus */
+.contact-email-pill:hover,
+.contact-email-pill:focus {
+  background: var(--accent);
+  color: #111; /* ✅ FIX: high contrast text */
+  box-shadow: 0 10px 30px rgba(192,192,192,0.35);
+  transform: translateY(-2px);
+  outline: none;
+}
+
     .social-btn {
       display: inline-flex;
       align-items: center;
@@ -262,6 +299,105 @@
       height: 100%;
       border: none;
     }
+    
+    /* =====================
+   YOUTUBE SUBSCRIBE PILL
+   ===================== */
+
+.yt-subscribe-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 0.45em 1.1em;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.18);
+
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* Hover lift */
+.yt-subscribe-pill:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  background: rgba(255,255,255,0.18);
+}
+
+/* YouTube icon */
+.yt-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+  background: #ff0000;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+/* Channel name */
+.yt-channel-name {
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+/* Bell icon */
+.yt-bell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  font-size: 0.8rem;
+
+  transition: background 0.25s ease;
+}
+
+/* Bell hover animation */
+.yt-subscribe-pill:hover .yt-bell {
+  background: rgba(255,255,255,0.3);
+  animation: bellRing 0.8s ease-in-out;
+}
+
+/* Bell ring keyframes */
+@keyframes bellRing {
+  0%   { transform: rotate(0); }
+  15%  { transform: rotate(12deg); }
+  30%  { transform: rotate(-12deg); }
+  45%  { transform: rotate(10deg); }
+  60%  { transform: rotate(-8deg); }
+  75%  { transform: rotate(4deg); }
+  100% { transform: rotate(0); }
+}
+
+@media (max-width: 600px) {
+  .yt-subscribe-pill {
+    font-size: 0.88rem;
+    padding: 0.4em 0.9em;
+    gap: 10px;
+  }
+}
+
     .reels-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -300,6 +436,98 @@
     .reel-item:hover .reel-icon {
       opacity: 1;
     }
+    
+    /* =====================
+   INSTAGRAM PROFILE PILL
+   ===================== */
+
+.ig-profile-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 0.45em 1em;
+  margin: 1.6em auto 0;
+
+  border-radius: 999px;
+  text-decoration: none;
+
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15);
+
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* Hover lift */
+.ig-profile-pill:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  background: rgba(255,255,255,0.16);
+}
+
+/* Instagram icon with gradient ring */
+.ig-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
+  background:
+    radial-gradient(circle at 30% 30%, #ffd776, #f56040 35%, #c13584 60%, #5851db 85%);
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+/* Handle text */
+.ig-handle {
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* Follow button (Instagram style) */
+.ig-follow-btn {
+  margin-left: 6px;
+  padding: 0.25em 0.85em;
+
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  background: #0095f6;
+  color: #fff;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Follow hover */
+.ig-profile-pill:hover .ig-follow-btn {
+  background: #1aa1ff;
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .ig-profile-pill {
+    font-size: 0.88rem;
+    gap: 10px;
+    padding: 0.4em 0.85em;
+  }
+}
+
     .instagram-note {
       font-size: 0.98rem;
       color: var(--accent);
@@ -323,205 +551,91 @@
     }
     @media (max-width: 900px) {
       .upcoming-shows {
-        gap: 1em;
+        gap: 1em; 
       }
+      
+      
+    
+      /* =====================
+   TICKET BASE — REQUIRED
+   ===================== */
+
+.ticket-card {
+  display: flex;
+  background: rgba(255,255,255,0.06);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+
+.ticket-stripe {
+  min-width: 74px;
+  background: rgba(255,255,255,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 0.6em;
+  text-align: center;
+}
+
+.ticket-stripe .day {
+  font-size: 0.75em;
+  letter-spacing: 0.1em;
+}
+
+.ticket-stripe .date {
+  font-size: 2.2em;
+  font-weight: 700;
+}
+
+.ticket-stripe .month {
+  font-size: 0.75em;
+}
+
+.ticket-main {
+  flex: 1;
+  padding: 1em;
+}
+
+.ticket-title {
+  font-weight: 700;
+  margin-bottom: 0.35em;
+}
+
+.ticket-details {
+  font-size: 0.95em;
+  opacity: 0.9;
+}
+
+.ticket-details div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ticket-side {
+  min-width: 46px;
+  display: flex;
+}
+
+.ticket-buy-btn {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  background: #fff;
+  color: #111;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.8em 0;
+  width: 100%;
+}
+
     }
+    
+    
     @media (max-width: 800px) {
-      .upcoming-shows {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 0.9em;
-        padding-bottom: 1.3em;
-        justify-content: flex-start !important;
-        align-items: flex-start;
-        scroll-snap-type: x mandatory;
-      }
-      .ticket-card {
-        min-width: calc(100vw - 4em);
-        max-width: calc(100vw - 4em);
-        flex: 0 0 calc(100vw - 4em);
-        height: 120px;
-        margin-right: 0;
-        scroll-snap-align: center;
-        box-sizing: border-box;
-        padding: 0.7em 0.5em;
-        min-height: 120px !important;
-      }
-      .ticket-stripe {
-        padding: 0.6em 0.5em;
-        min-width: 54px;
-        border-radius: 1em 0 0 1em;
-        height: 100%;
-      }
-      .ticket-stripe .date {
-        font-size: 1.25em;
-      }
-      .ticket-main {
-        padding: 0.6em 0.6em;
-        height: 100%;
-      }
-      .ticket-title {
-        font-size: 0.93em;
-      }
-      .ticket-details {
-        font-size: 0.85em;
-        gap: 0.11em;
-      }
-      .ticket-side {
-        min-width: 38px;
-        padding: 0;
-        border-left: 1px solid var(--accent);
-        border-top: none;
-        border-radius: 0 0.89em 0.89em 0;
-        height: 100%;
-      }
-      .ticket-buy-btn {
-        min-height: 100px;
-        padding: 0.3em 0.2em;
-        font-size: 0.95em;
-      }
-    }
-    .ticket-card {
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
-      min-height: 180px;
-      background: rgba(36, 36, 36, 0.97);
-      box-shadow: 0 7px 28px #0007;
-      border-radius: 1.0em;
-      border: 1.3px solid var(--accent);
-      min-width: 310px;
-      max-width: 350px;
-      flex: 1 1 310px;
-      position: relative;
-      transition: box-shadow 0.35s, transform 0.35s;
-      animation: fadeInUp 1.3s;
-      height: 180px;
-      overflow: hidden;
-    }
-    .ticket-card:hover {
-      box-shadow: 0 16px 48px #c0c0c088;
-      transform: translateY(-6px) scale(1.025) rotateX(1deg);
-    }
-    .ticket-stripe {
-      background: linear-gradient(180deg, #131313 80%, #222 100%);
-      border-radius: 1em 0 0 1em;
-      color: #fff;
-      padding: 1.1em 1.2em;
-      min-width: 74px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 10px #2228;
-      height: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-    .ticket-stripe::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
-      z-index: 1;
-    }
-    .ticket-stripe .day {
-      font-size: 1em;
-      letter-spacing: 0.04em;
-      font-weight: 600;
-      z-index: 2;
-    }
-    .ticket-stripe .date {
-      font-size: 2.2em;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      margin: 0.2em 0 0.09em 0;
-      z-index: 2;
-    }
-    .ticket-stripe .month {
-      font-size: 1em;
-      color: var(--accent);
-      z-index: 2;
-    }
-    .ticket-main {
-      padding: 1.2em 1.1em;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-width: 0;
-      flex: 1;
-      height: 100%;
-      position: relative;
-      z-index: 2;
-    }
-    .ticket-title {
-      font-size: 1.13em;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.32em;
-    }
-    .ticket-details {
-      font-size: 0.98em;
-      color: #eee;
-      display: flex;
-      flex-direction: column;
-      gap: 0.21em;
-    }
-    .ticket-details .fa-solid {
-      color: var(--accent);
-      margin-right: 7px;
-    }
-    .ticket-side {
-      border-left: 1.3px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      background: rgba(48, 48, 48, 0.97);
-      border-radius: 0 0.95em 0.95em 0;
-      min-width: 46px;
-      height: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-    .ticket-side::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
-      z-index: 1;
-    }
-    .ticket-buy-btn {
-      writing-mode: vertical-lr;
-      transform: rotate(180deg);
-      background: var(--accent);
-      color: #111;
-      border: none;
-      font-size: 1em;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      padding: 0.5em 0.3em;
-      border-radius: 31px;
-      cursor: pointer;
-      box-shadow: 0 2px 12px var(--accent)44;
-      transition: background 0.19s, color 0.19s, box-shadow 0.2s;
-      min-height: 120px;
-      margin: 0 0.26em;
-      height: 100%;
-      z-index: 2;
-      position: relative;
-    }
-    .ticket-buy-btn:hover {
-      background: #fff;
-      color: var(--accent);
-      box-shadow: 0 7px 18px var(--accent)28;
-    }
+      
     .footer {
       text-align: center;
       color: #bbb;
@@ -533,6 +647,40 @@
       border-top: 1px solid var(--accent)22;
       padding-top: 1.8em;
     }
+    /* =====================
+   TICKET HOVER EFFECT
+   ===================== */
+
+.ticket-card {
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    background 0.28s ease;
+}
+
+.ticket-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+  background: rgba(255,255,255,0.08);
+}
+
+/* Subtle glow on stripe */
+.ticket-card:hover .ticket-stripe {
+  background: rgba(255,255,255,0.18);
+}
+
+/* Buy button polish */
+.ticket-buy-btn {
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.ticket-card:hover .ticket-buy-btn {
+  background: var(--accent);
+  color: #111;
+}
+
     .sticky-header {
   position: fixed;
   top: 0;
@@ -626,10 +774,6 @@
         flex-wrap: nowrap !important;
         overflow-x: visible !important;
         justify-content: center !important;
-      }
-      #showsContent .ticket-card {
-        min-width: 320px !important;
-        max-width: 400px !important;
       }
     }
     .nav-menu {
@@ -1460,6 +1604,38 @@
   }
 }
 
+@media (max-width: 800px) {
+
+  /* SHRINK TICKET — KEEP ORIGINAL DESIGN */
+  
+
+ 
+  
+  .ticket-title {
+    font-size: 0.95em;     /* was 1.13em */
+  }
+
+  .ticket-details {
+    font-size: 0.85em;     /* was 0.98em */
+  }
+
+  
+
+  
+}
+
+@media (max-width: 800px) {
+
+  /* VISUAL SCALE ONLY — NO LAYOUT CHANGES */
+  #showsContent .ticket-card {
+    transform: scale(0.88);
+    transform-origin: left top;
+    margin-bottom: -18px; /* compensates scale spacing */
+  }
+
+}
+
+
   </style>
 </head>
 <body>
@@ -1532,9 +1708,25 @@
         <div class="youtube-responsive">
           <iframe src="https://www.youtube.com/embed/0IYNpp_VHhU" title="Latest YouTube Video" allowfullscreen loading="lazy"></iframe>
         </div>
-        <a href="https://www.youtube.com/@sarahsheik?sub_confirmation=1" target="_blank" class="youtube-subscribe">
-          <i class="fab fa-youtube"></i> SUBSCRIBE
-        </a>
+        <a
+  href="https://www.youtube.com/@sarahsheik?sub_confirmation=1"
+  target="_blank"
+  class="yt-subscribe-pill"
+  aria-label="Subscribe to Sarah Sheik on YouTube"
+>
+  <span class="yt-icon">
+    <i class="fab fa-youtube"></i>
+  </span>
+
+  <span class="yt-channel-name">
+    Sarah Sheik
+  </span>
+
+  <span class="yt-bell">
+    <i class="fas fa-bell"></i>
+  </span>
+</a>
+
       </section>
 
       <section class="section" id="sectionInstagram">
@@ -1557,19 +1749,35 @@
             <i class="fa-solid fa-play reel-icon"></i>
           </a>
         </div>
-        <div class="instagram-note">
-          Instagram: <a href="https://www.instagram.com/wakeandsheikh_/" target="_blank">@wakeandsheikh_</a>
-        </div>
+        <a
+  href="https://www.instagram.com/wakeandsheikh_/"
+  target="_blank"
+  class="ig-profile-pill"
+  aria-label="Follow Sarah Sheik on Instagram"
+>
+  <span class="ig-icon">
+    <i class="fab fa-instagram"></i>
+  </span>
+
+  <span class="ig-handle">
+    @wakeandsheikh_
+  </span>
+
+  <span class="ig-follow-btn">
+    Follow
+  </span>
+</a>
+
       </section>
 
       <section class="section" id="sectionContact">
         <div class="section-title"><span>Business Enquiries</span></div>
         <div class="business-enquiries" style="display: flex; flex-direction: column; align-items: center; gap: 1.1em;">
           <span style="color:#ececec;font-size:.95em;">For bookings and collaborations, email</span>
-          <a href="mailto:sarah@example.com" class="insta-pill"
-            style="color: var(--accent); font-size:1.06em; letter-spacing:0.01em; text-align:center; margin-bottom:0;">
-            sarah@example.com
-          </a>
+          <a href="mailto:sarah@example.com" class="contact-email-pill">
+  sarah@example.com
+</a>
+
           <!-- MOBILE BUTTON -->
 <button class="contact-open-btn" id="openContactSheet">
   <i class="fas fa-envelope"></i>
