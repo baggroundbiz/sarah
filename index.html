@@ -1405,7 +1405,13 @@
   }
 }
 
+  body.sheet-open {
+  overflow: hidden;
+  touch-action: none;
+}
 
+
+  
   
   </style>
 </head>
@@ -1636,6 +1642,12 @@
           <option>Phone Call</option>
         </select>
       </div>
+      
+      <div class="form-group" id="contactDetailGroup" style="display:none;">
+  <label id="contactDetailLabel"></label>
+  <input type="text" id="contactDetailInput" name="Contact Detail">
+</div>
+
 
       <small style="opacity:.7;font-size:.85em;">
         We’ll contact you via your selected method
@@ -1664,16 +1676,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!openBtn || !sheet || !overlay) return;
 
-  openBtn.addEventListener('click', () => {
+  function openSheet() {
     sheet.classList.add('active');
     overlay.classList.add('active');
+    document.body.classList.add('sheet-open');
     sheet.setAttribute('aria-hidden', 'false');
-  });
+  }
 
-  overlay.addEventListener('click', () => {
+  function closeSheet() {
     sheet.classList.remove('active');
     overlay.classList.remove('active');
+    document.body.classList.remove('sheet-open');
     sheet.setAttribute('aria-hidden', 'true');
+  }
+
+  openBtn.addEventListener('click', openSheet);
+  overlay.addEventListener('click', closeSheet);
+
+  // Optional: close on ESC (desktop testing)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeSheet();
+  });
+
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const methodSelect = document.querySelector('select[name="Contact Preference"]');
+  const detailGroup = document.getElementById('contactDetailGroup');
+  const detailLabel = document.getElementById('contactDetailLabel');
+  const detailInput = document.getElementById('contactDetailInput');
+
+  if (!methodSelect || !detailGroup) return;
+
+  methodSelect.addEventListener('change', () => {
+    const value = methodSelect.value;
+
+    if (!value || value === 'Email') {
+      detailGroup.style.display = 'none';
+      detailInput.required = false;
+      detailInput.value = '';
+      return;
+    }
+
+    detailGroup.style.display = 'block';
+    detailInput.required = true;
+
+    switch (value) {
+      case 'WhatsApp':
+        detailLabel.textContent = 'WhatsApp Number';
+        detailInput.placeholder = '+91 XXXXX XXXXX';
+        detailInput.type = 'tel';
+        break;
+
+      case 'Phone Call':
+        detailLabel.textContent = 'Phone Number';
+        detailInput.placeholder = '+91 XXXXX XXXXX';
+        detailInput.type = 'tel';
+        break;
+
+      case 'Instagram DM':
+        detailLabel.textContent = 'Instagram Profile Link';
+        detailInput.placeholder = 'https://instagram.com/yourprofile';
+        detailInput.type = 'url';
+        break;
+
+      default:
+        detailGroup.style.display = 'none';
+    }
   });
 
 });
