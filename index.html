@@ -1301,172 +1301,6 @@
 
   @media (max-width: 1023px) {
 
-  .contact-sheet {
-    position: fixed;
-    left: 0;
-    bottom: -100%;
-    width: 100%;
-
-    /* IMPORTANT */
-    max-height: 85vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-
-    background: rgba(30,30,34,.96);
-    backdrop-filter: blur(22px);
-
-    border-radius: 26px 26px 0 0;
-    padding: 1.8em 1.6em 3em;
-
-    box-shadow: 0 -30px 80px rgba(0,0,0,.6);
-    transition: bottom .45s cubic-bezier(.22,.61,.36,1);
-
-    z-index: 3100;
-  }
-
-  .contact-sheet.active {
-    bottom: 0;
-  }
-
-}
-
-@media (max-width: 1023px) {
-  .contact-sheet form {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  }
-}
-
-@media (max-width: 1023px) {
-  .contact-sheet {
-    padding-bottom: calc(3em + env(safe-area-inset-bottom));
-  }
-}
-
-
-  .contact-sheet.active {
-    bottom: 0;
-  }
-
-  .contact-sheet-handle {
-  width: 48px;
-  height: 5px;
-  background: rgba(255,255,255,.35);
-  border-radius: 6px;
-  margin: 0 auto 1em;
-}
-
-
-  .contact-sheet h3 {
-    text-align: center;
-    margin-bottom: 1.2em;
-  }
-
-  @media (max-width: 1023px) {
-
-  .contact-sheet input,
-  .contact-sheet select,
-  .contact-sheet textarea {
-    width: 100%;
-    max-width: 100%;
-    display: block;
-
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 12px;
-
-    padding: 0.85em 0.9em;
-    font-size: 1rem;
-    color: #fff;
-
-    outline: none;
-  }
-
-  .contact-sheet textarea {
-    min-height: 110px;
-    resize: vertical;
-  }
-}
-
-@media (max-width: 1023px) {
-
-  /* Closed select (what user sees) */
-  .contact-sheet select {
-    color: #fff;
-    background-color: rgba(255,255,255,0.12);
-  }
-
-  /* Open dropdown options (native) */
-  .contact-sheet select option {
-    color: #111;              /* readable text */
-    background: #fff;         /* white background */
-  }
-
-  /* Placeholder option */
-  .contact-sheet select option[value=""] {
-    color: #666;
-  }
-}
-@media (max-width: 1023px) {
-  .contact-sheet select {
-    appearance: none;
-    -webkit-appearance: none;
-    background-image:
-      linear-gradient(45deg, transparent 50%, #fff 50%),
-      linear-gradient(135deg, #fff 50%, transparent 50%);
-    background-position:
-      calc(100% - 20px) 55%,
-      calc(100% - 15px) 55%;
-    background-size: 5px 5px;
-    background-repeat: no-repeat;
-  }
-}
-
-
-  .contact-sheet textarea {
-    min-height: 90px;
-  }
-}
-
-
-  @media (max-width: 1023px) {
-  #sectionContact form {
-    display: none !important;
-  }
-}
-
-  @media (max-width: 1023px) {
-
-  .contact-sheet {
-    position: fixed;
-    left: 0;
-    bottom: -100%;
-    width: 100%;
-    max-height: 85vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    background: rgba(30,30,34,.96);
-    backdrop-filter: blur(22px);
-    border-radius: 26px 26px 0 0;
-    padding: 1.8em 1.6em calc(3em + env(safe-area-inset-bottom));
-    box-shadow: 0 -30px 80px rgba(0,0,0,.6);
-    transition: bottom .45s cubic-bezier(.22,.61,.36,1);
-    z-index: 3100;
-  }
-
-  .contact-sheet.active {
-    bottom: 0;
-  }
-
-  .contact-sheet-handle {
-    width: 48px;
-    height: 5px;
-    background: rgba(255,255,255,.35);
-    border-radius: 6px;
-    margin: 0 auto 1em;
-  }
-
   .contact-overlay {
     position: fixed;
     inset: 0;
@@ -1485,14 +1319,92 @@
 
 }
 
-  /* === MOBILE CONTACT SHEET INPUT FIX === */
+
+/* ============================
+   MOBILE CONTACT SLIDE SHEET
+   ============================ */
 @media (max-width: 1023px) {
-  .contact-sheet *,
-  .contact-sheet *::before,
-  .contact-sheet *::after {
+
+  .contact-sheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: -100%;
+    background: rgba(30,30,34,.96);
+    backdrop-filter: blur(22px);
+    border-radius: 26px 26px 0 0;
+    box-shadow: 0 -30px 80px rgba(0,0,0,.6);
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: bottom .45s cubic-bezier(.22,.61,.36,1);
+    z-index: 3100;
+  }
+
+  .contact-sheet.active {
+    bottom: 0;
+  }
+
+  .contact-sheet-inner {
+    padding: 1.8em 1.4em calc(3em + env(safe-area-inset-bottom));
+  }
+
+  .contact-sheet-handle {
+    width: 48px;
+    height: 5px;
+    background: rgba(255,255,255,.35);
+    border-radius: 6px;
+    margin: 0 auto 1em;
+  }
+
+  .contact-sheet form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .contact-sheet input,
+  .contact-sheet select,
+  .contact-sheet textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     box-sizing: border-box;
+    padding: 0.85em;
+    font-size: 1rem;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+  }
+
+  .contact-sheet textarea {
+    min-height: 110px;
+    resize: vertical;
+  }
+
+  .contact-sheet select option {
+    color: #111;
+    background: #fff;
+  }
+
+  .contact-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+    z-index: 3000;
+  }
+
+  .contact-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
+
 
   
   </style>
@@ -1680,59 +1592,64 @@
     © Sarah Sheik 2025
   </footer>
 
-  <!-- MOBILE CONTACT SHEET -->
 
 
-<div id="contactOverlay" class="contact-overlay"></div>
 
-
-<!-- MOBILE CONTACT SHEET -->
+<!-- <!-- MOBILE CONTACT SHEET -->
 <div id="contactSheet" class="contact-sheet" aria-hidden="true">
-  <div class="contact-sheet-handle"></div>
+  <div class="contact-sheet-inner">
 
-  <h3>Get in Touch</h3>
+    <div class="contact-sheet-handle"></div>
+    <h3 style="text-align:center;margin-bottom:1em;">Get in Touch</h3>
 
-  <form action="mailto:sarah@example.com" method="post" enctype="text/plain">
+    <form action="mailto:sarah@example.com" method="post" enctype="text/plain">
 
-    <div class="form-group">
-      <label>Type of Inquiry</label>
-      <select name="Inquiry Type" required>
-        <option value="">Select</option>
-        <option>Show Booking</option>
-        <option>Brand Collaboration</option>
-        <option>Private Event</option>
-        <option>Media / Interview</option>
-        <option>Other</option>
-      </select>
-    </div>
+      <div class="form-group">
+        <label>Type of Inquiry</label>
+        <select name="Inquiry Type" required>
+          <option value="">Select</option>
+          <option>Show Booking</option>
+          <option>Brand Collaboration</option>
+          <option>Private Event</option>
+          <option>Media / Interview</option>
+          <option>Other</option>
+        </select>
+      </div>
 
-    <div class="form-group">
-      <label>Name</label>
-      <input type="text" name="Name" required>
-    </div>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="Name" required>
+      </div>
 
-    <div class="form-group">
-      <label>Email</label>
-      <input type="email" name="Email" required>
-    </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="Email" required>
+      </div>
 
-    <div class="form-group">
-      <label>Budget Range</label>
-      <select name="Budget">
-        <option>Not Sure</option>
-        <option>Below ₹50k</option>
-        <option>₹50k – ₹1L</option>
-        <option>₹1L+</option>
-      </select>
-    </div>
+      <div class="form-group">
+        <label>Preferred Contact Method</label>
+        <select name="Contact Preference" required>
+          <option value="">Select</option>
+          <option>Email</option>
+          <option>WhatsApp</option>
+          <option>Instagram DM</option>
+          <option>Phone Call</option>
+        </select>
+      </div>
 
-    <div class="form-group">
-      <label>Message</label>
-      <textarea name="Message" required></textarea>
-    </div>
+      <small style="opacity:.7;font-size:.85em;">
+        We’ll contact you via your selected method
+      </small>
 
-    <button type="submit" class="submit-btn">Send Inquiry</button>
-  </form>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea name="Message" required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Send Inquiry</button>
+    </form>
+
+  </div>
 </div>
 
 <div id="contactOverlay" class="contact-overlay"></div>
