@@ -1344,6 +1344,7 @@
   .contact-sheet.active {
     bottom: 0;
   }
+  
 
   .contact-sheet-inner {
     padding: 1.8em 1.4em calc(3em + env(safe-area-inset-bottom));
@@ -1411,7 +1412,39 @@
 }
 
 
+  @media (max-width: 1023px) {
+
+  .contact-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,.75);
+    font-size: 1.4rem;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .contact-close-btn:hover {
+    color: #fff;
+  }
+
+}
+
   
+  @media (max-width: 1023px) {
+
+  .contact-sheet {
+    touch-action: none; /* allow custom gesture */
+  }
+
+  .contact-sheet.dragging {
+    transition: none !important;
+  }
+
+}
+
   
   </style>
 </head>
@@ -1606,6 +1639,8 @@
   <div class="contact-sheet-inner">
 
     <div class="contact-sheet-handle"></div>
+    
+
     <h3 style="text-align:center;margin-bottom:1em;">Get in Touch</h3>
 
     <form action="mailto:sarah@example.com" method="post" enctype="text/plain">
@@ -1676,10 +1711,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!openBtn || !sheet || !overlay) return;
 
+  let startY = 0;
+  let currentY = 0;
+  let isDragging = false;
+
   function openSheet() {
     sheet.classList.add('active');
     overlay.classList.add('active');
     document.body.classList.add('sheet-open');
+    sheet.style.transform = 'translateY(0)';
     sheet.setAttribute('aria-hidden', 'false');
   }
 
@@ -1687,19 +1727,52 @@ document.addEventListener('DOMContentLoaded', () => {
     sheet.classList.remove('active');
     overlay.classList.remove('active');
     document.body.classList.remove('sheet-open');
+    sheet.style.transform = '';
     sheet.setAttribute('aria-hidden', 'true');
   }
 
   openBtn.addEventListener('click', openSheet);
   overlay.addEventListener('click', closeSheet);
 
-  // Optional: close on ESC (desktop testing)
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeSheet();
+  /* ---------- DRAG TO CLOSE ---------- */
+
+  sheet.addEventListener('touchstart', (e) => {
+    startY = e.touches[0].clientY;
+    isDragging = true;
+    sheet.classList.add('dragging');
+  });
+
+  sheet.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+
+    currentY = e.touches[0].clientY;
+    const deltaY = currentY - startY;
+
+    if (deltaY > 0) {
+      sheet.style.transform = `translateY(${deltaY}px)`;
+    }
+  });
+
+  sheet.addEventListener('touchend', () => {
+    sheet.classList.remove('dragging');
+
+    const deltaY = currentY - startY;
+
+    if (deltaY > 120) {
+      closeSheet();
+    } else {
+      sheet.style.transform = 'translateY(0)';
+    }
+
+    isDragging = false;
+    startY = 0;
+    currentY = 0;
   });
 
 });
 </script>
+
+
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
