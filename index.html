@@ -436,6 +436,66 @@
   }
 }
 
+  /* ===== Instagram Peek Carousel (Premium UX) ===== */
+
+.reels-grid {
+  display: flex !important;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  /* IMPORTANT: allow peek */
+  padding-right: 25%;
+}
+
+/* Hide scrollbar */
+.reels-grid::-webkit-scrollbar {
+  display: none;
+}
+.reels-grid {
+  scrollbar-width: none;
+}
+
+/* Reel width adjusted to allow next-item peek */
+.reel-item {
+  flex: 0 0 48%;
+  scroll-snap-align: start;
+}
+  
+  /* ===== Instagram-style right edge fade hint ===== */
+
+#sectionInstagram {
+  position: relative;
+}
+
+/* Fade overlay */
+#sectionInstagram::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70px;
+  height: 100%;
+  pointer-events: none;
+
+  background: linear-gradient(
+    to left,
+    rgba(18,18,25,0.9),
+    rgba(18,18,25,0.4),
+    rgba(18,18,25,0)
+  );
+
+  z-index: 5;
+}
+
+/* Slightly softer on small screens */
+@media (max-width: 768px) {
+  #sectionInstagram::after {
+    width: 70px;
+  }
+}
 
   </style>
   
@@ -540,12 +600,6 @@
   
       </div>
       
-      <div class="reels-nav reels-left" aria-label="Scroll left">
-  <i class="fas fa-chevron-left"></i>
-</div>
-<div class="reels-nav reels-right" aria-label="Scroll right">
-  <i class="fas fa-chevron-right"></i>
-</div>
 
       <div style="text-align: center;">
         <a href="https://www.instagram.com/wakeandsheikh_/" class="ig-profile-pill">
@@ -714,30 +768,7 @@ observer.observe(document.getElementById('heroSection'));
     reels.scrollLeft = scrollLeft - walk;
   });
 
-    const reelsGrid = document.querySelector('.reels-grid');
-  const leftArrow = document.querySelector('.reels-left');
-  const rightArrow = document.querySelector('.reels-right');
-
-  function updateReelsArrows() {
-    const maxScroll = reelsGrid.scrollWidth - reelsGrid.clientWidth;
-
-    leftArrow.classList.toggle('hidden', reelsGrid.scrollLeft <= 5);
-    rightArrow.classList.toggle('hidden', reelsGrid.scrollLeft >= maxScroll - 5);
-  }
-
-  rightArrow.addEventListener('click', () => {
-    reelsGrid.scrollBy({ left: reelsGrid.clientWidth, behavior: 'smooth' });
-  });
-
-  leftArrow.addEventListener('click', () => {
-    reelsGrid.scrollBy({ left: -reelsGrid.clientWidth, behavior: 'smooth' });
-  });
-
-  reelsGrid.addEventListener('scroll', updateReelsArrows);
-  window.addEventListener('load', updateReelsArrows);
-  window.addEventListener('resize', updateReelsArrows);
-
-
+   
 </script>
 </body>
 </html>
