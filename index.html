@@ -147,7 +147,7 @@
       position: relative;
       z-index: 2;
       scroll-snap-align: start;
-      max-width: 820px;
+      max-width: 1100;
       margin: 0 auto;
       background: var(--glass-bg);
       backdrop-filter: blur(16px);
@@ -157,6 +157,13 @@
       transform: translateY(20px);
       animation: mainFadeIn 1s forwards 2.2s;
     }
+    
+    @media (min-width: 1400px) {
+  main {
+    max-width: 1200px;
+  }
+}
+
     @keyframes mainFadeIn { to { opacity: 1; transform: translateY(0); } }
 
     .section { margin-bottom: 3.5em; }
@@ -209,6 +216,28 @@
     .reel-item img { width: 100%; height: 100%; object-fit: cover; }
     .reel-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 2rem; opacity: 0.8; }
     
+
+     /* =====================
+   DESKTOP YOUTUBE SCALE
+   ===================== */
+@media (min-width: 1024px) {
+  #sectionYoutube .youtube-responsive {
+    max-width: 760px;
+    margin: 0 auto 1.5em;
+    border-radius: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #sectionYoutube {
+    padding-top: 1.5em;
+  }
+
+  #sectionYoutube .section-title {
+    margin-bottom: 1em;
+  }
+}
+
 
     /* STICKY HEADER FIXED */
     .sticky-header {
@@ -306,7 +335,7 @@
       padding: 1.8em 1.4em 3em;
     }
     .contact-sheet.active { bottom: 0; }
-    .contact-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 3000; }
+    .contact-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.72); opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 3000; }
     .contact-overlay.active { opacity: 1; pointer-events: auto; }
     .contact-open-btn { background: #fff; color: #111; border: none; padding: 1em 1.5em; border-radius: 32px; font-weight: 600; display: block; margin: 0 auto; }
     
@@ -513,6 +542,336 @@
   }
 }
 
+  /* =====================
+   DESKTOP SCROLL FIX
+   ===================== */
+@media (min-width: 1024px) {
+  html, body {
+    scroll-snap-type: none;
+  }
+
+  .hero,
+  main {
+    scroll-snap-align: unset;
+  }
+}
+/* =====================
+   DESKTOP HERO UPGRADE
+   ===================== */
+@media (min-width: 1024px) {
+  .hero-content {
+    justify-content: center;
+    padding-bottom: 0;
+  }
+
+  .comic-name {
+    font-size: 3.2rem;
+  }
+
+  .insta-pill {
+    font-size: 1.1rem;
+  }
+
+  .swipe-btn {
+    display: none;
+  }
+}
+
+  /* =====================
+   DESKTOP NAV ENHANCEMENT
+   ===================== */
+@media (min-width: 1024px) {
+  .hamburger-btn {
+    display: none;
+  }
+
+  .nav-menu {
+    position: static;
+    display: flex !important;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .nav-menu ul {
+    display: flex;
+    gap: 24px;
+  }
+
+  .nav-menu li {
+    margin: 0;
+  }
+
+  .nav-menu a {
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+
+  .nav-menu a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+}
+/* =====================
+   DESKTOP REELS UX
+   ===================== */
+@media (min-width: 1024px) {
+  .reels-grid {
+    cursor: grab;
+  }
+
+  .reels-grid:active {
+    cursor: grabbing;
+  }
+
+  .reel-item {
+    flex: 0 0 22%;
+  }
+}
+/* =====================
+   DESKTOP HOVER DEPTH
+   ===================== */
+@media (hover: hover) {
+  .yt-subscribe-pill,
+  .ig-profile-pill,
+  .ticket-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .yt-subscribe-pill:hover,
+  .ig-profile-pill:hover,
+  .ticket-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+  }
+}
+
+@media (min-width: 1024px) {
+  body.page-bounce,
+  body.page-bounce-release {
+    transform: none !important;
+  }
+}
+
+
+  /* =====================
+   DESKTOP HERO SCALE UP
+   ===================== */
+@media (min-width: 1024px) {
+  .hero-content .comic-name {
+    font-size: 3.8rem;
+    letter-spacing: 0.12em;
+  }
+
+  .hero-content .insta-pill {
+    font-size: 1.25rem;
+    padding: 0.6em 1.8em;
+    border-width: 2px;
+  }
+}
+ 
+ @media (min-width: 1024px) {
+  .hero-content .socials {
+    gap: 22px;
+  }
+
+  .hero-content .social-btn {
+    width: 54px;
+    height: 54px;
+    font-size: 1.45rem;
+    border-width: 2px;
+  }
+}
+
+/* =====================
+   DESKTOP HERO SPACING + SCALE
+   ===================== */
+@media (min-width: 1024px) {
+  .hero-content {
+    gap: 0;
+  }
+
+  .hero-content .insta-pill {
+    margin-bottom: 2em;
+    font-size: 1.4rem;
+    padding: 0.7em 2.2em;
+    border-width: 2px;
+  }
+
+  .hero-content .socials {
+    gap: 28px;
+    margin-bottom: 0;
+  }
+
+  .hero-content .social-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.6rem;
+    border-width: 2px;
+  }
+}
+
+
+  /* =====================
+   CONTACT → DESKTOP MODAL
+   ===================== */
+@media (min-width: 1024px) {
+  .contact-sheet {
+    top: 50%;
+    bottom: auto;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.96);
+    width: 520px;
+    max-width: 92vw;
+    border-radius: 22px;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .contact-sheet.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+
+  /* Remove drag handle on desktop */
+  .contact-sheet > div:first-child {
+    display: none;
+  }
+}
+
+  /* =====================
+   DESKTOP YOUTUBE CAROUSEL
+   ===================== */
+@media (min-width: 1024px) {
+  .youtube-carousel {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .youtube-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .youtube-carousel {
+    scrollbar-width: none;
+  }
+
+  .youtube-card {
+    flex: 0 0 680px; /* smaller than full width */
+    scroll-snap-align: start;
+  }
+
+  #sectionYoutube .youtube-responsive {
+    border-radius: 18px;
+  }
+}
+
+
+  /* =====================
+   DESKTOP INSTAGRAM HOVER (FIXED)
+   ===================== */
+@media (hover: hover) and (min-width: 1024px) {
+
+  .reel-item {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .reel-item img {
+    transition: transform 0.45s ease;
+  }
+
+  .reel-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    opacity: 0;
+    z-index: 2;
+    transition: opacity 0.35s ease;
+  }
+
+  .reel-icon {
+    z-index: 3;
+    opacity: 0.65;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  .reel-item:hover {
+    transform: scale(1.045);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+  }
+
+  .reel-item:hover img {
+    transform: scale(1.08);
+  }
+
+  .reel-item:hover::after {
+    opacity: 1;
+  }
+
+  .reel-item:hover .reel-icon {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+  
+  /* =====================
+   DESKTOP WIDE TOGGLE BUTTONS
+   ===================== */
+@media (min-width: 1024px) {
+  .toggle-section {
+    display: flex;
+    justify-content: center;
+  }
+
+  .toggle-section .toggle-btn {
+    min-width: 220px;
+    padding: 0.75em 2.2em;
+    font-size: 1rem;
+  }
+}
+/* =====================
+   DESKTOP WIDE YOUTUBE CTA
+   ===================== */
+@media (min-width: 1024px) {
+  .yt-subscribe-pill {
+    width: 100%;
+    max-width: 520px;
+    justify-content: center;
+    padding: 0.9em 2em;
+    font-size: 1.05rem;
+  }
+}
+/* =====================
+   DESKTOP WIDE INSTAGRAM CTA
+   ===================== */
+@media (min-width: 1024px) {
+  .ig-profile-pill {
+    width: 100%;
+    max-width: 480px;
+    justify-content: center;
+    padding: 0.8em 2em;
+    font-size: 1rem;
+  }
+}
+@media (min-width: 1024px) {
+  #sectionYoutube > div,
+  #sectionInstagram > div:last-child {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
   </style>
   
 </head>
@@ -584,9 +943,23 @@
   <div id="profileContent">
     <section class="section" id="sectionYoutube">
       <div class="section-title"><span>YouTube</span></div>
-      <div class="youtube-responsive">
-        <iframe src="https://www.youtube.com/embed/0IYNpp_VHhU" allowfullscreen></iframe>
-      </div>
+      <div class="youtube-carousel">
+  <div class="youtube-card">
+    <div class="youtube-responsive">
+      <iframe src="https://www.youtube.com/embed/0IYNpp_VHhU" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Future videos go here -->
+  <!--
+  <div class="youtube-card">
+    <div class="youtube-responsive">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+    </div>
+  </div>
+  -->
+</div>
+
       <div style="text-align: center;">
         <a href="https://www.youtube.com/@sarahsheik" class="yt-subscribe-pill">
           <span class="yt-icon"><i class="fab fa-youtube"></i></span> Sarah Sheik <span style="margin-left:8px; opacity:0.7;"><i class="fas fa-bell"></i></span>
@@ -746,6 +1119,12 @@
 
 const observer = new IntersectionObserver(
   ([entry]) => {
+    if (window.innerWidth >= 1024) {
+      stickyHeader.style.display = "flex";
+      stickyHeader.style.opacity = "1";
+      return;
+    }
+
     if (!entry.isIntersecting) {
       stickyHeader.style.display = 'flex';
       setTimeout(() => (stickyHeader.style.opacity = '1'), 10);
@@ -758,6 +1137,7 @@ const observer = new IntersectionObserver(
   },
   { threshold: 0.05 }
 );
+
 
 observer.observe(document.getElementById('heroSection'));
 
@@ -813,6 +1193,36 @@ window.addEventListener("scroll", () => {
     }, 120);
   }
 });
+
+   /* =====================
+   DESKTOP YOUTUBE DRAG
+   ===================== */
+if (window.innerWidth >= 1024) {
+  const ytCarousel = document.querySelector('.youtube-carousel');
+  if (ytCarousel) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    ytCarousel.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - ytCarousel.offsetLeft;
+      scrollLeft = ytCarousel.scrollLeft;
+    });
+
+    ytCarousel.addEventListener('mouseleave', () => isDown = false);
+    ytCarousel.addEventListener('mouseup', () => isDown = false);
+
+    ytCarousel.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - ytCarousel.offsetLeft;
+      const walk = (x - startX) * 1.2;
+      ytCarousel.scrollLeft = scrollLeft - walk;
+    });
+  }
+}
+
 
    
 </script>
