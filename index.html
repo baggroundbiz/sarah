@@ -208,6 +208,7 @@
     .reel-item { aspect-ratio: 9 / 16; border-radius: 8px; overflow: hidden; position: relative; }
     .reel-item img { width: 100%; height: 100%; object-fit: cover; }
     .reel-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 2rem; opacity: 0.8; }
+    
 
     /* STICKY HEADER FIXED */
     .sticky-header {
@@ -356,6 +357,86 @@
   opacity: 1;
 }
 
+  /* ===== Instagram Reels Carousel (override only) ===== */
+
+.reels-grid {
+  display: flex !important;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px;
+}
+
+/* Hide scrollbar (optional, clean look) */
+.reels-grid::-webkit-scrollbar {
+  display: none;
+}
+.reels-grid {
+  scrollbar-width: none;
+}
+
+/* Each reel keeps SAME height & ratio */
+.reel-item {
+  flex: 0 0 calc(50% - 5px); /* EXACT same visual width as grid */
+  scroll-snap-align: start;
+}
+
+
+ /* ===== Premium Carousel Arrows ===== */
+
+#sectionInstagram {
+  position: relative;
+}
+
+.reels-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 50;
+  transition: opacity 0.25s, transform 0.25s;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.reels-nav:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.reels-left {
+  left: -12px;
+}
+
+.reels-right {
+  right: -12px;
+}
+
+/* Hidden state */
+.reels-nav.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Mobile polish */
+@media (max-width: 768px) {
+  .reels-nav {
+    opacity: 0.85;
+  }
+}
+
+
   </style>
   
 </head>
@@ -440,9 +521,32 @@
     <section class="section" id="sectionInstagram">
       <div class="section-title"><span>Instagram</span></div>
       <div class="reels-grid">
-        <a href="#" class="reel-item"><img src="https://i.ibb.co/Q34PvmDH/543812879-1323209159362240-323886714071857675-n.jpg"><i class="fa-solid fa-play reel-icon"></i></a>
-        <a href="#" class="reel-item"><img src="https://i.ibb.co/d4fK7kvd/496446386-18501885898027361-6485895403620284611-n.jpg"><i class="fa-solid fa-play reel-icon"></i></a>
+        <a href="https://www.instagram.com/reel/DOYH8tLkxqf/?igsh=cXp6bXp4MWhwNHR2" target="_blank" class="reel-item" title="Watch Reel 1">
+            <img src="https://i.ibb.co/Q34PvmDH/543812879-1323209159362240-323886714071857675-n.jpg" alt="Instagram Reel 1 - Short description">
+            <i class="fa-solid fa-play reel-icon"></i>
+          </a>
+          <a href="https://www.instagram.com/reel/DJcO6z0zZ2k/?igsh=bWNvZGtsc2dwcHVu" target="_blank" class="reel-item" title="Watch Reel 2">
+            <img src="https://i.ibb.co/d4fK7kvd/496446386-18501885898027361-6485895403620284611-n.jpg" alt="Instagram Reel 2 - Short description">
+            <i class="fa-solid fa-play reel-icon"></i>
+          </a>
+          <a href="https://www.instagram.com/reel/C_Png0qyhPS/?igsh=MTNrdXljOTZodGUzZg==" target="_blank" class="reel-item" title="Watch Reel 3">
+            <img src="https://i.ibb.co/TBVdNnfN/503488863-720848660883911-3270264962267597984-n.jpg" alt="Instagram Reel 3 - Short description">
+            <i class="fa-solid fa-play reel-icon"></i>
+          </a>
+          <a href="https://www.instagram.com/reel/C9JeWvhy-nM/?igsh=amR5NmdhbTJhMTFj" target="_blank" class="reel-item" title="Watch Reel 4">
+            <img src="https://i.ibb.co/84rQFV60/527560421-1913659652751529-9209224677805767874-n-heic.jpg" alt="Instagram Reel 4 - Short description">
+            <i class="fa-solid fa-play reel-icon"></i>
+          </a>
+  
       </div>
+      
+      <div class="reels-nav reels-left" aria-label="Scroll left">
+  <i class="fas fa-chevron-left"></i>
+</div>
+<div class="reels-nav reels-right" aria-label="Scroll right">
+  <i class="fas fa-chevron-right"></i>
+</div>
+
       <div style="text-align: center;">
         <a href="https://www.instagram.com/wakeandsheikh_/" class="ig-profile-pill">
           <span class="ig-icon"><i class="fab fa-instagram"></i></span> @wakeandsheikh_ <span style="margin-left:8px; background:#0095f6; padding:2px 8px; border-radius:10px; font-size:0.7rem;">Follow</span>
@@ -586,6 +690,53 @@ const observer = new IntersectionObserver(
 );
 
 observer.observe(document.getElementById('heroSection'));
+
+  const reels = document.querySelector('.reels-grid');
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  reels.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - reels.offsetLeft;
+    scrollLeft = reels.scrollLeft;
+  });
+
+  reels.addEventListener('mouseleave', () => isDown = false);
+  reels.addEventListener('mouseup', () => isDown = false);
+
+  reels.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - reels.offsetLeft;
+    const walk = (x - startX) * 1.2;
+    reels.scrollLeft = scrollLeft - walk;
+  });
+
+    const reelsGrid = document.querySelector('.reels-grid');
+  const leftArrow = document.querySelector('.reels-left');
+  const rightArrow = document.querySelector('.reels-right');
+
+  function updateReelsArrows() {
+    const maxScroll = reelsGrid.scrollWidth - reelsGrid.clientWidth;
+
+    leftArrow.classList.toggle('hidden', reelsGrid.scrollLeft <= 5);
+    rightArrow.classList.toggle('hidden', reelsGrid.scrollLeft >= maxScroll - 5);
+  }
+
+  rightArrow.addEventListener('click', () => {
+    reelsGrid.scrollBy({ left: reelsGrid.clientWidth, behavior: 'smooth' });
+  });
+
+  leftArrow.addEventListener('click', () => {
+    reelsGrid.scrollBy({ left: -reelsGrid.clientWidth, behavior: 'smooth' });
+  });
+
+  reelsGrid.addEventListener('scroll', updateReelsArrows);
+  window.addEventListener('load', updateReelsArrows);
+  window.addEventListener('resize', updateReelsArrows);
+
 
 </script>
 </body>
