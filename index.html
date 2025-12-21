@@ -573,8 +573,12 @@
   }
 
   .swipe-btn {
-    display: none;
-  }
+  display: block;
+  bottom: 6vh;
+  font-size: 2.4rem;
+  opacity: 0.75;
+ }
+
 }
 
   /* =====================
@@ -871,6 +875,144 @@
   }
 }
 
+   /* =====================
+   DESKTOP CTA FILL HOVER
+   ===================== */
+@media (hover: hover) and (min-width: 1024px) {
+  .yt-subscribe-pill,
+  .ig-profile-pill,
+  .toggle-section .toggle-btn,
+  .contact-open-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+
+  .yt-subscribe-pill::before,
+  .ig-profile-pill::before,
+  .toggle-section .toggle-btn::before,
+  .contact-open-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: -1;
+  }
+
+  .yt-subscribe-pill:hover::before,
+  .ig-profile-pill:hover::before,
+  .toggle-section .toggle-btn:hover::before,
+  .contact-open-btn:hover::before {
+    transform: translateX(0);
+  }
+
+  .yt-subscribe-pill:hover,
+  .ig-profile-pill:hover,
+  .toggle-section .toggle-btn:hover,
+  .contact-open-btn:hover {
+    color: #111;
+  }
+}
+/* =====================
+   DESKTOP CTA GRADIENT SWEEP
+   ===================== */
+@media (hover: hover) and (min-width: 1024px) {
+  .yt-subscribe-pill::after,
+  .ig-profile-pill::after,
+  .contact-open-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255,255,255,0.35),
+      transparent
+    );
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+
+  .yt-subscribe-pill:hover::after,
+  .ig-profile-pill:hover::after,
+  .contact-open-btn:hover::after {
+
+    left: 120%;
+  }
+}
+
+/* =====================
+   DESKTOP CTA WIDTH ALIGNMENT
+   ===================== */
+@media (min-width: 1024px) {
+  .yt-subscribe-pill,
+  .ig-profile-pill {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .toggle-section {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+/* =====================
+   ACCESSIBILITY FOCUS STATES
+   ===================== */
+:focus-visible {
+  outline: none;
+}
+
+@media (min-width: 1024px) {
+  a:focus-visible,
+  button:focus-visible {
+    box-shadow:
+      0 0 0 3px rgba(255,255,255,0.6),
+      0 0 0 6px rgba(192,192,192,0.8);
+    border-radius: 999px;
+  }
+}
+
+   
+   /* =====================
+   DESKTOP HERO ARROW FADE
+   ===================== */
+@media (min-width: 1024px) {
+  .swipe-btn {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .swipe-btn.fade-out {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px);
+    pointer-events: none;
+  }
+}
+
+   /* =====================
+   DESKTOP SEND INQUIRY CTA
+   ===================== */
+@media (min-width: 1024px) {
+  .contact-open-btn {
+    width: 100%;
+    max-width: 680px;
+    padding: 1em 2.2em;
+    font-size: 1.05rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+}
 
   </style>
   
@@ -1223,6 +1365,23 @@ if (window.innerWidth >= 1024) {
   }
 }
 
+
+   /* =====================
+   DESKTOP HERO ARROW FADE
+   ===================== */
+if (window.innerWidth >= 1024) {
+  const heroArrow = document.querySelector('.swipe-btn');
+
+  window.addEventListener('scroll', () => {
+    if (!heroArrow) return;
+
+    if (window.scrollY > 120) {
+      heroArrow.classList.add('fade-out');
+    } else {
+      heroArrow.classList.remove('fade-out');
+    }
+  });
+}
 
    
 </script>
