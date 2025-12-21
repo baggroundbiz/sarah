@@ -496,6 +496,22 @@
     width: 70px;
   }
 }
+  
+  
+  /* =====================
+   PAGE BOUNCE (MOBILE)
+   ===================== */
+@media (max-width: 764px) {
+  body.page-bounce {
+    transform: translateY(-6px);
+    transition: transform 0.25s cubic-bezier(.22,1,.36,1);
+  }
+
+  body.page-bounce-release {
+    transform: translateY(0);
+    transition: transform 0.45s cubic-bezier(.22,1,.36,1);
+  }
+}
 
   </style>
   
@@ -767,6 +783,36 @@ observer.observe(document.getElementById('heroSection'));
     const walk = (x - startX) * 1.2;
     reels.scrollLeft = scrollLeft - walk;
   });
+
+   
+   /* =====================
+   MOBILE PAGE BOUNCE
+   ===================== */
+let bouncing = false;
+
+window.addEventListener("scroll", () => {
+  if (window.innerWidth > 764) return;
+
+  const atBottom =
+    window.innerHeight + window.scrollY >=
+    document.documentElement.scrollHeight - 2;
+
+  if (atBottom && !bouncing) {
+    bouncing = true;
+
+    document.body.classList.add("page-bounce");
+
+    setTimeout(() => {
+      document.body.classList.remove("page-bounce");
+      document.body.classList.add("page-bounce-release");
+
+      setTimeout(() => {
+        document.body.classList.remove("page-bounce-release");
+        bouncing = false;
+      }, 450);
+    }, 120);
+  }
+});
 
    
 </script>
