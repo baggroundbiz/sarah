@@ -325,6 +325,7 @@
 
     /* CONTACT SHEET */
     .contact-sheet {
+      display: none;
       position: fixed;
       left: 0; right: 0; bottom: -100%;
       background: rgba(30,30,34,.98);
@@ -334,7 +335,10 @@
       z-index: 3100;
       padding: 1.8em 1.4em 3em;
     }
-    .contact-sheet.active { bottom: 0; }
+    .contact-sheet.active {
+  display: block;
+  bottom: 0;
+}
     .contact-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.72); opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 3000; }
     .contact-overlay.active { opacity: 1; pointer-events: auto; }
     .contact-open-btn { background: #fff; color: #111; border: none; padding: 1em 1.5em; border-radius: 32px; font-weight: 600; display: block; margin: 0 auto; }
