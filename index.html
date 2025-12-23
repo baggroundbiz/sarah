@@ -355,7 +355,6 @@
     body.sheet-open { overflow: hidden; }
     
     
-
   
     /* ===== Powered by (minimal) ===== */
 
@@ -729,11 +728,16 @@
     max-width: 92vw;
     border-radius: 22px;
     transition:
-      opacity 0.3s ease,
-      transform 0.3s ease;
+    opacity 0.3s ease,
+    transform 0.3s ease;
     opacity: 0;
     pointer-events: none;
+    max-height: 85vh;          /* PREVENT overflow */
+    display: flex;
+    flex-direction: column;
+
   }
+
 
   .contact-sheet.active {
     opacity: 1;
@@ -744,6 +748,23 @@
   /* Remove drag handle on desktop */
   .contact-sheet > div:first-child {
     display: none;
+  }
+}
+
+/* DESKTOP CONTACT FORM SCROLL FIX */
+@media (min-width: 1024px) {
+  .contact-sheet form {
+    overflow-y: auto;
+    padding-right: 6px;
+  }
+
+  .contact-sheet form::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .contact-sheet form::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.25);
+    border-radius: 10px;
   }
 }
 
@@ -1197,18 +1218,50 @@
   <h3 style="text-align:center; margin-bottom: 1.5em;">Contact</h3>
   <form action="mailto:sarah@example.com" method="post" enctype="text/plain">
     <div class="form-group">
-      <label>Inquiry Type</label>
-      <select name="Type" required>
-        <option value="">Select</option>
-        <option>Show Booking</option>
-        <option>Brand Collaboration</option>
-        <option>Private Event</option>
-      </select>
-    </div>
+  <label>Inquiry Type</label>
+  <select name="Inquiry Type" required>
+    <option value="">Select</option>
+    <option>Show Booking</option>
+    <option>Corporate Event</option>
+    <option>Brand Collaboration</option>
+    <option>Content / Reels</option>
+    <option>Private Event</option>
+    <option>Other</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label>Event Date</label>
+  <input type="date" name="Event Date">
+</div>
+
+<div class="form-group">
+  <label>City / Location</label>
+  <input
+    type="text"
+    name="Location"
+    placeholder="City, venue, or event location"
+  >
+</div>
+
+
     <div class="form-group">
       <label>Name</label>
       <input type="text" name="Name" required>
     </div>
+    <div class="form-group">
+  <label>Preferred Contact Method</label>
+  <select id="preferredContact" name="Preferred Contact" required>
+    <option value="">Select</option>
+    <option value="email">Email</option>
+    <option value="phone">Phone Call</option>
+    <option value="whatsapp">WhatsApp</option>
+    <option value="instagram">Instagram</option>
+  </select>
+</div>
+
+<div class="form-group" id="dynamicContactField"></div>
+
     <div class="form-group">
       <label>Message</label>
       <textarea name="Message" rows="4" required></textarea>
@@ -1380,6 +1433,52 @@ if (window.innerWidth >= 1024) {
     } else {
       heroArrow.classList.remove('fade-out');
     }
+  });
+}
+
+   /* =====================
+   CONTACT METHOD LOGIC
+   ===================== */
+const preferredContact = document.getElementById("preferredContact");
+const dynamicContactField = document.getElementById("dynamicContactField");
+
+if (preferredContact) {
+  preferredContact.addEventListener("change", () => {
+    dynamicContactField.innerHTML = "";
+
+    let fieldHTML = "";
+
+    switch (preferredContact.value) {
+      case "email":
+        fieldHTML = `
+          <label>Email Address</label>
+          <input type="email" name="Contact Email" placeholder="you@example.com" required>
+        `;
+        break;
+
+      case "phone":
+        fieldHTML = `
+          <label>Phone Number</label>
+          <input type="tel" name="Contact Phone" placeholder="+91 XXXXX XXXXX" required>
+        `;
+        break;
+
+      case "whatsapp":
+        fieldHTML = `
+          <label>WhatsApp Number</label>
+          <input type="tel" name="WhatsApp" placeholder="+91 XXXXX XXXXX" required>
+        `;
+        break;
+
+      case "instagram":
+        fieldHTML = `
+          <label>Instagram Profile</label>
+          <input type="url" name="Instagram Profile" placeholder="https://instagram.com/username" required>
+        `;
+        break;
+    }
+
+    dynamicContactField.innerHTML = fieldHTML;
   });
 }
 
