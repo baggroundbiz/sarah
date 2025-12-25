@@ -736,9 +736,11 @@
     transform 0.3s ease;
     opacity: 0;
     pointer-events: none;
-    max-height: 85vh;          /* PREVENT overflow */
+    height: 85vh;
+    max-height: 85vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
   }
 
@@ -756,11 +758,27 @@
 }
 
 /* DESKTOP CONTACT FORM SCROLL FIX */
-@media (min-width: 1024px) {
+ @media (min-width: 1024px) {
   .contact-sheet form {
+    flex: 1;
     overflow-y: auto;
-    padding-right: 6px;
+    padding-right: 8px;
   }
+  
+  @media (min-width: 1024px) {
+  .contact-sheet > h3 {
+    flex-shrink: 0;
+  }
+
+  .contact-sheet > div:first-child {
+    flex-shrink: 0;
+  }
+
+ @media (min-width: 1024px) {
+  .contact-sheet form {
+    overscroll-behavior: contain;
+  }
+
 
   .contact-sheet form::-webkit-scrollbar {
     width: 4px;
