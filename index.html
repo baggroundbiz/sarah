@@ -18,7 +18,7 @@
       --glass-bg: rgba(18, 18, 25, 0.84);
       --glass-border: rgba(255, 255, 255, 0.07);
       --shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
-      --mobile-hero-bg: #111; /* Fallback color */
+      --mobile-hero-bg: none;
     }
 
     html, body {
@@ -49,6 +49,7 @@
       background-size: cover;
       background-repeat: no-repeat;
       transition: background-image 0.5s ease-in-out;
+      background-image: var(--mobile-hero-bg);
     }
 
     /* Dark Overlay for Mobile Hero */
@@ -404,6 +405,7 @@
       .hero-slide {
         position: absolute; inset: 0;
         background-size: cover; 
+        /* FIX: Center Top to always show faces/heads in banner */
         background-position: center center; 
         background-repeat: no-repeat;
         opacity: 0; transition: opacity 1.5s ease-in-out;
@@ -583,7 +585,7 @@
        ========================================================= */
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKLHP-2US7maKFEpvQ31IS0TckONdpec4bauv9hzh5cnws2r0tK43lVcv8D5dqmAeA/exec";
 
-    // UPDATED HELPER: CORRECT HIGH PERFORMANCE LINK CONVERTER
+    // UPDATED HELPER: SECURE HTTPS LINK CONVERTER
     function convertDriveLink(url) {
         if (!url) return '';
         // If it's not a drive link, return as is
@@ -598,7 +600,7 @@
             return url; // Return original if ID extraction fails
         }
         
-        // Use the high-performance 'lh3' domain (Must be HTTPS)
+        // SECURE HTTPS LINK FORMAT
         return `https://lh3.googleusercontent.com/d/${id}`;
     }
 
@@ -683,14 +685,31 @@
               mobileBgUrl = convertDriveLink(data.hero[0]); 
            }
            
-           // Apply Mobile Background
-           if(mobileBgUrl && window.innerWidth < 1024) {
-              // Ensure we set the property to `url('LINK')`
-              document.documentElement.style.setProperty('--mobile-hero-bg', `url('${mobileBgUrl}')`);
-              // Force background image on the element just in case
-              const bgHero = document.querySelector('.bg-hero');
-              if(bgHero) bgHero.style.backgroundImage = `url('${mobileBgUrl}')`;
-           }
+function updateMobileHeroBackground() {
+  if (window.innerWidth < 1024 && data.hero && data.hero.length > 0) {
+    let mobileBgUrl = '';
+    if (typeof data.hero[0] === 'object' && data.hero[0].mobile) {
+      mobileBgUrl = convertDriveLink(data.hero[0].mobile);
+    } else if (typeof data.hero[0] === 'string') {
+      mobileBgUrl = convertDriveLink(data.hero[0]);
+    }
+    if (mobileBgUrl) {
+      document.documentElement.style.setProperty('--mobile-hero-bg', `url('${mobileBgUrl}')`);
+      const bgHero = document.querySelector('.bg-hero');
+      if (bgHero) bgHero.style.backgroundImage = `url('${mobileBgUrl}')`;
+    }
+  }
+}
+
+// Call this function initially after fetchContent
+fetchContent().then(() => {
+  updateMobileHeroBackground();
+});
+
+// Also, add an event listener for resize
+window.addEventListener('resize', () => {
+  updateMobileHeroBackground();
+});
 
            // Render Desktop Carousel
            if (window.innerWidth >= 1024) {
@@ -712,17 +731,28 @@
       }
     }
 
-    // Hero Auto-Play Logic
     function startHeroCarousel() {
-        const slides = document.querySelectorAll('.hero-slide');
-        if(slides.length < 2) return;
-        let current = 0;
-        setInterval(() => {
-            slides[current].classList.remove('active');
-            current = (current + 1) % slides.length;
-            slides[current].classList.add('active');
-        }, 5000); // Change image every 5 seconds
+    const slides = document.querySelectorAll('.hero-slide');
+
+    // If no slides, do nothing
+    if (slides.length === 0) return;
+
+    // If only ONE image, just show it
+    if (slides.length === 1) {
+        slides[0].classList.add('active');
+        return;
     }
+
+    // If MORE than one image, start carousel
+    let current = 0;
+    slides[0].classList.add('active');
+
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, 5000);
+}
 
     fetchContent();
 
