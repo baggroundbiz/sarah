@@ -448,10 +448,18 @@
 
     /* CONTACT SHEET */
     .contact-sheet {
-      position: fixed; left: 0; right: 0; bottom: -100%;
-      background: rgba(30, 30, 34, .98); backdrop-filter: blur(22px);
-      border-radius: 26px 26px 0 0; transition: bottom .45s cubic-bezier(.22, .61, .36, 1);
-      z-index: 3100; padding: 1.8em 1.4em 3em;
+      position: fixed; left: 0; right: 0;
+      bottom: -150%; /* Pushes it further down so it doesn't "peep" */
+      background: #1c1c1f; /* Solid dark background */
+      border-radius: 20px 20px 0 0; 
+      transition: bottom 0.4s ease-in-out;
+      z-index: 3100; 
+      padding: 1.5em 1.5em 3em;
+      
+      /* VITAL FIXES: */
+      max-height: 85vh; /* Never covers the full screen (leaves room to tap top) */
+      overflow-y: auto; /* Adds scroll inside the sheet if form is long */
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
     }
     .contact-sheet.active { bottom: 0; }
     
