@@ -467,10 +467,34 @@
       max-width: 480px;
       margin: 0 auto;
     }
+    
+    .close-sheet-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 3200;
+      padding: 0;
+      line-height: 1;
+    }
 
     @media (max-width: 480px) {
       .contact-sheet {
-        padding-bottom: 3.5em;
+        padding: 1.5em 1em 2em; /* Reduced padding */
+      }
+      .form-group {
+         margin-bottom: 0.8em; /* Reduced margin */
+      }
+      .form-group input, .form-group select, .form-group textarea {
+         padding: 0.6em; /* Smaller inputs */
+      }
+      .contact-sheet h3 {
+         margin-top: 0;
+         margin-bottom: 0.8em;
       }
     }
 
@@ -726,8 +750,8 @@
 
   <main id="mainContent">
     <div class="desktop-intro text-center" style="text-align: center;">
-       <h2 style="font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 0.5em;">Welcome</h2>
-       <p style="max-width: 600px; margin: 0 auto; opacity: 0.8; font-size: 1.1rem; line-height: 1.6;">Comedian. Content Creator. Professional Vibe Checker.</p>
+       <h1 id="hero-title" style="font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 0.5em; color: white;"></h1>
+       <p id="hero-subtitle" style="max-width: 600px; margin: 0 auto; opacity: 0.8; font-size: 1.1rem; line-height: 1.6; color: white;"></p>
     </div>
 
     <section class="toggle-section" style="text-align:center; margin-bottom: 2em;">
@@ -789,6 +813,7 @@
 
   <div id="contactSheet" class="contact-sheet">
     <div style="width: 48px; height: 5px; background: rgba(255,255,255,0.3); border-radius: 10px; margin: 0 auto 1.5em;"></div>
+    <button type="button" class="close-sheet-btn" id="closeContactBtn">&times;</button>
     <h3 style="text-align:center; margin-bottom: 1.5em;">Contact</h3>
     
     <form action="mailto:sarah@example.com" method="post" enctype="text/plain">
@@ -1092,14 +1117,20 @@
     const openBtn = document.getElementById('openContactSheet');
     const sheet = document.getElementById('contactSheet');
     const overlay = document.getElementById('contactOverlay');
+    const closeBtn = document.getElementById('closeContactBtn');
+    
+    function closeSheet() {
+      sheet.classList.remove('active'); overlay.classList.remove('active');
+      document.body.classList.remove('sheet-open');
+    }
+    
     openBtn.addEventListener('click', () => {
       sheet.classList.add('active'); overlay.classList.add('active');
       document.body.classList.add('sheet-open');
     });
-    overlay.addEventListener('click', () => {
-      sheet.classList.remove('active'); overlay.classList.remove('active');
-      document.body.classList.remove('sheet-open');
-    });
+    
+    overlay.addEventListener('click', closeSheet);
+    if(closeBtn) closeBtn.addEventListener('click', closeSheet);
 
     const stickyHeader = document.getElementById('stickyHeader');
     const observer = new IntersectionObserver(([entry]) => {
@@ -1170,6 +1201,30 @@
           contactInput.placeholder = 'Enter phone number';
         }
       });
+    }
+
+    /* =====================
+       HERO COPY LOGIC
+       ===================== */
+    const heroCopies = [
+      {
+        title: "Laughs with intention. Stories that land.",
+        subtitle: "Comedian and content creator shaping sharp, relatable comedy."
+      },
+      {
+        title: "Comedy with clarity and character.",
+        subtitle: "Stand-up comedian creating content for stage and screen."
+      }
+    ];
+
+    const randomCopy = heroCopies[Math.floor(Math.random() * heroCopies.length)];
+
+    const heroTitleEl = document.getElementById("hero-title");
+    const heroSubtitleEl = document.getElementById("hero-subtitle");
+    
+    if (heroTitleEl && heroSubtitleEl) {
+       heroTitleEl.textContent = randomCopy.title;
+       heroSubtitleEl.textContent = randomCopy.subtitle;
     }
   </script>
 </body>
